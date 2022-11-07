@@ -1,15 +1,15 @@
 const express = require('express');
 const { DataManagementClient, ModelDerivativeClient, urnify } = require('forge-server-utils');
-const { FORGE_CLIENT_ID, FORGE_CLIENT_SECRET, FORGE_BUCKET } = require('../config.js');
+const { APS_CLIENT_ID, APS_CLIENT_SECRET, APS_BUCKET } = require('../config.js');
 
-let dataManagementClient = new DataManagementClient({ client_id: FORGE_CLIENT_ID, client_secret: FORGE_CLIENT_SECRET });
-let modelDerivativeClient = new ModelDerivativeClient({ client_id: FORGE_CLIENT_ID, client_secret: FORGE_CLIENT_SECRET });
+let dataManagementClient = new DataManagementClient({ client_id: APS_CLIENT_ID, client_secret: APS_CLIENT_SECRET });
+let modelDerivativeClient = new ModelDerivativeClient({ client_id: APS_CLIENT_ID, client_secret: APS_CLIENT_SECRET });
 let router = express.Router();
 
 // List models in a pre-configured bucket
 router.get('/', async function (req, res, next) {
     try {
-        const objects = await dataManagementClient.listObjects(FORGE_BUCKET);
+        const objects = await dataManagementClient.listObjects(APS_BUCKET);
         res.json(objects.map(obj => {
             return {
                 name: obj.objectKey,

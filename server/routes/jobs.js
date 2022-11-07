@@ -3,11 +3,11 @@ const fs = require('fs-extra');
 const express = require('express');
 const { exec } = require('child_process');
 const { ModelDerivativeClient } = require('forge-server-utils');
-const { FORGE_CLIENT_ID, FORGE_CLIENT_SECRET } = require('../config.js');
+const { APS_CLIENT_ID, APS_CLIENT_SECRET } = require('../config.js');
 const CACHE_FOLDER = path.join(__dirname, '..', '..', 'cache');
 const WORKER_FOLDER = path.join(__dirname, '..', 'workers');
 
-let modelDerivativeClient = new ModelDerivativeClient({ client_id: FORGE_CLIENT_ID, client_secret: FORGE_CLIENT_SECRET });
+let modelDerivativeClient = new ModelDerivativeClient({ client_id: APS_CLIENT_ID, client_secret: APS_CLIENT_SECRET });
 let router = express.Router();
 
 async function executeJob(urn, guid, cacheDir, statusFilePath, logFilePath, /* outputFilePath */) {

@@ -1,6 +1,6 @@
 const { ModelDerivativeClient, ManifestHelper } = require('forge-server-utils');
 const { SvfReader, GltfWriter } = require('forge-convert-utils');
-const { FORGE_CLIENT_ID, FORGE_CLIENT_SECRET } = require('../config.js');
+const { APS_CLIENT_ID, APS_CLIENT_SECRET } = require('../config.js');
 
 /*
  * Customized glTF writer, outputting meshes with an additional _CUSTOM_INDEX
@@ -52,7 +52,7 @@ class CustomGltfWriter extends GltfWriter {
 }
 
 async function convert(urn, guid, outputDir) {
-    const auth = { client_id: FORGE_CLIENT_ID, client_secret: FORGE_CLIENT_SECRET };
+    const auth = { client_id: APS_CLIENT_ID, client_secret: APS_CLIENT_SECRET };
     // const modelDerivativeClient = new ModelDerivativeClient(auth);
     // const helper = new ManifestHelper(await modelDerivativeClient.getManifest(urn));
     // const derivatives = helper.search({ type: 'resource', role: 'graphics' });

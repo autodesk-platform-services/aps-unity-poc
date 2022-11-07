@@ -1,18 +1,18 @@
 const {
-    FORGE_CLIENT_ID,
-    FORGE_CLIENT_SECRET,
-    FORGE_BUCKET,
+    APS_CLIENT_ID,
+    APS_CLIENT_SECRET,
+    APS_BUCKET,
     PORT
 } = process.env;
 
-if (!FORGE_CLIENT_ID || !FORGE_CLIENT_SECRET || !FORGE_BUCKET) {
+if (!APS_CLIENT_ID || !APS_CLIENT_SECRET || !APS_BUCKET) {
     console.warn('Some of the required env. variables are missing.');
     process.exit(1);
 }
 
 module.exports = {
-    FORGE_CLIENT_ID,
-    FORGE_CLIENT_SECRET,
-    FORGE_BUCKET,
+    APS_CLIENT_ID,
+    APS_CLIENT_SECRET,
+    APS_BUCKET,
     PORT: PORT || 3000
 };
