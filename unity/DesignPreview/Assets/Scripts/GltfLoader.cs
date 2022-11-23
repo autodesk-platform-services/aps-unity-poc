@@ -47,7 +47,16 @@ public class GltfLoader : MonoBehaviour
             foreach (var component in gameObject.GetComponentsInChildren<MeshFilter>())
             {
                 ColorsDictionary.Add(component.mesh, component.mesh.colors32);
-                component.mesh.colors32 = null;
+                // Replace the original vertex colors with a new array filled with {r: 255, g: 255, b: 255, alpha: 0} to avoid breaking shaders
+                var colors = new Color32[component.mesh.colors32.Length];
+                for (var i = 0; i < colors.Length; i++)
+                {
+                    colors[i].r = 255;
+                    colors[i].g = 255;
+                    colors[i].b = 255;
+                    colors[i].a = 0;
+                }
+                component.mesh.colors32 = colors;
                 // Add mesh collider
                 try
                 {
