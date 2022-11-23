@@ -85,6 +85,10 @@ public class ModelList : MonoBehaviour
                 options.Add(new TMP_Dropdown.OptionData(model.name));
             }
             dropdown.AddOptions(options);
+            if (models.items.Length > 0)
+            {
+                StartCoroutine(LoadModel(models.items[0]));
+            }
         }
     }
 
