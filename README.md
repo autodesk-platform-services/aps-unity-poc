@@ -1,8 +1,8 @@
-# aps-unity-poc
+# APS/Unity Prototype
 
 Prototype application allowing you to load and preview your [Autodesk Platform Services](https://aps.autodesk.com) models in Unity.
 
-![Screenshot](./screenshot.png)
+![Screenshot](./thumbnail.png)
 
 The sample code consists of two projects:
 
