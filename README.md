@@ -2,7 +2,7 @@
 
 Prototype application allowing you to load and preview your [Autodesk Platform Services](https://aps.autodesk.com) models in Unity.
 
-![Screenshot](./thumbnail.png)
+![thumbnail](./thumbnail.png)
 
 The sample code consists of two projects:
 
