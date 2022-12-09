@@ -1,11 +1,11 @@
 # APS/Unity Prototype
 
 ![platforms](https://img.shields.io/badge/platform-windows%20%7C%20osx%20%7C%20linux-lightgray.svg)
-[![node.js](https://img.shields.io/badge/Node.js-16.17-blue.svg)](https://nodejs.org)
+[![node.js](https://img.shields.io/badge/node.js-16.17-blue.svg)](https://nodejs.org)
 [![npm](https://img.shields.io/badge/npm-8.15-blue.svg)](https://www.npmjs.com/)
 [![license](https://img.shields.io/:license-mit-green.svg)](https://opensource.org/licenses/MIT)
 
-[![Model Derivative](https://img.shields.io/badge/Model%20Derivative-v1-green.svg)](https://aps.autodesk.com/en/docs/model-derivative/v2/overview/)
+[![Model Derivative](https://img.shields.io/badge/Model%20Derivative-v2-green.svg)](https://aps.autodesk.com/en/docs/model-derivative/v2/overview/)
 
 Prototype application allowing you to load and preview your [Autodesk Platform Services](https://aps.autodesk.com) models in Unity.
 
@@ -53,4 +53,4 @@ Please see the [LICENSE](LICENSE) file for more details.
 
 ## Author
 
-Petr Broz, Developer Advocate
+Petr Broz ([@ipetrbroz](https://twitter.com/ipetrbroz)), Developer Advocate
