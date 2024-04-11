@@ -20,12 +20,13 @@ async function getAccessToken() {
     return _credentials.access_token;
 }
 
-async function listObjects(bucketKey, accessToken) {
-    let resp = await ossClient.getObjects(accessToken, bucketKey, 64);
+async function listObjects(bucketKey) {
+    const accessToken = await getAccessToken();
+    let resp = await ossClient.getObjects(accessToken, bucketKey, { limit: 64 });
     let objects = resp.items;
     while (resp.next) {
         const startAt = new URL(resp.next).searchParams.get('startAt');
-        resp = await ossClient.getObjects(accessToken, bucketKey, 64, startAt);
+        resp = await ossClient.getObjects(accessToken, bucketKey, { startAt, limit: 64 });
         objects = objects.concat(resp.items);
     }
     return objects;
@@ -34,7 +35,7 @@ async function listObjects(bucketKey, accessToken) {
 // List models in a pre-configured bucket
 router.get('/', async function (req, res, next) {
     try {
-        const objects = await listObjects(APS_BUCKET, await getAccessToken());
+        const objects = await listObjects(APS_BUCKET);
         res.json(objects.map(obj => {
             return {
                 name: obj.objectKey,
