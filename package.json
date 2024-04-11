@@ -7,11 +7,14 @@
     "start": "node server/app.js"
   },
   "dependencies": {
+    "@aps_sdk/authentication": "^0.1.0-beta.1",
+    "@aps_sdk/autodesk-sdkmanager": "^0.0.7-beta.1",
+    "@aps_sdk/model-derivative": "^0.1.0-beta.1",
+    "@aps_sdk/oss": "^0.1.0-beta.1",
     "express": "^4.18.1",
-    "forge-convert-utils": "^4.0.1",
-    "forge-server-utils": "^8.4.0",
     "fs-extra": "^10.1.0",
     "gltfpack": "^0.17.0",
-    "sqlite3": "^5.0.8"
+    "sqlite3": "^5.0.8",
+    "svf-utils": "^5.0.3"
   }
 }

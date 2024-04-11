@@ -2,12 +2,16 @@ const path = require('path');
 const fs = require('fs-extra');
 const express = require('express');
 const { exec } = require('child_process');
-const { ModelDerivativeClient } = require('forge-server-utils');
+const { SdkManagerBuilder } = require('@aps_sdk/autodesk-sdkmanager');
+const { AuthenticationClient, Scopes } = require('@aps_sdk/authentication');
+const { ModelDerivativeClient } = require('@aps_sdk/model-derivative');
 const { APS_CLIENT_ID, APS_CLIENT_SECRET } = require('../config.js');
 const CACHE_FOLDER = path.join(__dirname, '..', '..', 'cache');
 const WORKER_FOLDER = path.join(__dirname, '..', 'workers');
 
-let modelDerivativeClient = new ModelDerivativeClient({ client_id: APS_CLIENT_ID, client_secret: APS_CLIENT_SECRET });
+const sdkManager = SdkManagerBuilder.create().build();
+const authenticationClient = new AuthenticationClient(sdkManager);
+const modelDerivativeClient = new ModelDerivativeClient(sdkManager);
 let router = express.Router();
 
 async function executeJob(urn, guid, cacheDir, statusFilePath, logFilePath, /* outputFilePath */) {
@@ -52,7 +56,8 @@ router.post('/:urn', async function (req, res, next) {
         fs.ensureDirSync(req.cacheDir);
         let guid = req.query.guid;
         if (!guid) {
-            const res = await modelDerivativeClient.getMetadata(urn);
+            const credentials = await authenticationClient.getTwoLeggedToken(APS_CLIENT_ID, APS_CLIENT_SECRET, [Scopes.ViewablesRead]);
+            const res = await modelDerivativeClient.getModelViews(credentials.access_token, urn);
             const viewable = res.data.metadata.find(entry => entry.role === '3d');
             if (viewable) {
                 guid = viewable.guid;

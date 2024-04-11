@@ -1,5 +1,4 @@
-const { ModelDerivativeClient, ManifestHelper } = require('forge-server-utils');
-const { SvfReader, GltfWriter } = require('forge-convert-utils');
+const { SvfReader, GltfWriter, TwoLeggedAuthenticationProvider } = require('svf-utils');
 const { APS_CLIENT_ID, APS_CLIENT_SECRET } = require('../config.js');
 
 /*
@@ -52,15 +51,7 @@ class CustomGltfWriter extends GltfWriter {
 }
 
 async function convert(urn, guid, outputDir) {
-    const auth = { client_id: APS_CLIENT_ID, client_secret: APS_CLIENT_SECRET };
-    // const modelDerivativeClient = new ModelDerivativeClient(auth);
-    // const helper = new ManifestHelper(await modelDerivativeClient.getManifest(urn));
-    // const derivatives = helper.search({ type: 'resource', role: 'graphics' });
-    // if (derivatives.length === 0) {
-    //     throw new Error('No 3D viewables found.');
-    // }
-    // let derivative = derivatives.find(entry => entry.useAsDefault) || derivatives[0];
-    const reader = await SvfReader.FromDerivativeService(urn, guid, auth);
+    const reader = await SvfReader.FromDerivativeService(urn, guid, new TwoLeggedAuthenticationProvider(APS_CLIENT_ID, APS_CLIENT_SECRET));
     const scene = await reader.read({ log: console.log });
     const writer = new CustomGltfWriter({
         ignoreLineGeometry: true,
