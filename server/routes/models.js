@@ -15,7 +15,7 @@ let _credentials = null;
 async function getAccessToken() {
     if (!_credentials || _credentials.expires_at < Date.now()) {
         _credentials = await authenticationClient.getTwoLeggedToken(APS_CLIENT_ID, APS_CLIENT_SECRET, [Scopes.DataRead, Scopes.ViewablesRead]);
-        _credentials.expires_at = Date.now() + credentials.expires_in * 1000;
+        _credentials.expires_at = Date.now() + _credentials.expires_in * 1000;
     }
     return _credentials.access_token;
 }
