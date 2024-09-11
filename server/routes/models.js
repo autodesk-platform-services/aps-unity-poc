@@ -39,7 +39,7 @@ router.get('/', async function (req, res, next) {
         res.json(objects.map(obj => {
             return {
                 name: obj.objectKey,
-                urn: urnify(obj.objectId)
+                urn: Buffer.from(obj.objectId).toString('base64').replace(/=/g, '')
             };
         }));
     } catch (err) {
